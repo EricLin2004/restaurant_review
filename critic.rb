@@ -46,15 +46,9 @@ class Critic
 			FROM (
 				SELECT reviews.score scores
 					FROM reviews
-					JOIN critics
+					LEFT OUTER JOIN critics
 						ON critics.id = reviews.critic_id
 				 WHERE critic.id = ?
-				 UNION
-				SELECT 0 scores
-				  FROM reviews
-				  JOIN critics
-				 		ON critics.id = reviews.critic_id
-				 WHERE critic.id = ? AND reviews.score IS NULL
 			)
 		SQL
 

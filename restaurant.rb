@@ -40,6 +40,33 @@ attr_reader :id
 		RestaurantDB.instance.execute(sql).map {|hash| Restaurant.new(hash)}
 	end
 
+	def self.top_restaurants(n)
+		sql = <<-SQL
+			SELECT restaurants.*, AVG(score) as ave_score
+			  FROM restaurants
+			  JOIN reviews
+		  	  ON reviews.restaurant_id = restaurants.id
+	  GROUP BY restaurants.id
+	  ORDER BY AVG(score) DESC
+	     LIMIT ?
+		SQL
+
+		RestaurantDB.instance.execute(sql, n).map {|hash| Restaurant.new(hash)}
+	end
+
+	def self.highly_reviewed_restaurants(min_reviews)
+		sql = <<-SQL
+			SELECT restaurants.*
+			  FROM reviews
+			  JOIN restaurants
+			    ON reviews.restaurant_id = restaurants.id
+		GROUP BY restaurant_id
+			HAVING COUNT(reviews.id) >= ?
+		SQL
+
+		RestaurantDB.instance.execute(sql, min_reviews).map {|hash| Restaurant.new(hash)}
+	end
+
 	def initialize(hash)
 		@id = hash['id']
 		@name = hash['name']
@@ -64,19 +91,12 @@ attr_reader :id
 			  FROM (
 				  SELECT reviews.score scores
 				    FROM reviews
-				    JOIN restaurants
+			 			LEFT OUTER JOIN restaurants
 				      ON reviews.restaurant_id = restaurants.id
 				   WHERE restaurants.id = ?
-					 UNION
-					SELECT 0 scores
-					  FROM reviews
-					  JOIN restaurants
-					    ON reviews.restaurant_id = restaurants.id
-					 WHERE restaurants.id = ? AND reviews.score IS NULL
 				)
 		SQL
 
-		RestaurantDB.instance.execute(sql, id, id)
+		RestaurantDB.instance.execute(sql, id)
 	end
-
 end

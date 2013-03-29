@@ -16,8 +16,11 @@ class RestaurantDB < SQLite3::Database
 end
 
 #p Restaurant.find_by_id(1)
-#p Restaurant.find_by_id(2).average_review_score
+#p Restaurant.find_by_id(1).average_review_score
 #puts Restaurant.all
-puts Chef.find_by_id(2).coworkers
+#puts Chef.find_by_id(2).coworkers
 #puts Chef.find_by_id(1).reviews
 #puts Critic.find_by_id(2).unreviewed_restaurants
+#puts Restaurant.top_restaurants(3)
+
+puts Restaurant.highly_reviewed_restaurants(1)
