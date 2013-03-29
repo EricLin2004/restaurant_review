@@ -72,7 +72,7 @@ class Critic
 					 WHERE critics.id = ?)
 		SQL
 
-		RestaurantDB.instance.execute(sql, id)#.map {|hash| Restaurant.new(hash)}
+		RestaurantDB.instance.execute(sql, id).map {|hash| Restaurant.new(hash)}
 	end
 
 end

@@ -52,10 +52,6 @@ class Chef
 	end
 
 	def coworkers
-		# sql = <<-SQL
-		# 	SELECT *
-		# 	FROM chef_tenure
-		# SQL
 		sql = <<-SQL
 			SELECT DISTINCT chef_b.*
 				FROM chefs chef_a
@@ -72,7 +68,7 @@ class Chef
 			   AND tenure_b.start_date < tenure_a.end_date
 		SQL
 		#debugger
-		RestaurantDB.instance.execute(sql, id, id)#.map {|hash| Chef.new(hash)}
+		RestaurantDB.instance.execute(sql, id, id).map {|hash| Chef.new(hash)}
 	end
 
 	def reviews
