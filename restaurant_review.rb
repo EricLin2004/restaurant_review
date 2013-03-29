@@ -18,6 +18,6 @@ end
 #p Restaurant.find_by_id(1)
 #p Restaurant.find_by_id(2).average_review_score
 #puts Restaurant.all
-#puts Chef.find_by_id(3).coworkers
+puts Chef.find_by_id(2).coworkers
 #puts Chef.find_by_id(1).reviews
-puts Critic.find_by_id(2).unreviewed_restaurants
+#puts Critic.find_by_id(2).unreviewed_restaurants

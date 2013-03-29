@@ -57,10 +57,8 @@ class Chef
 				FROM chefs chef_a
 				JOIN chef_tenure tenure_a
 				  ON chef_a.id = tenure_a.chef_id
-				JOIN restaurants r
-				  ON r.id = tenure_a.restaurant_id
 				JOIN chef_tenure tenure_b
-				  ON tenure_b.restaurant_id = r.id
+				  ON tenure_b.restaurant_id = tenure_a.restaurant_id
 				JOIN chefs chef_b
 				  ON chef_b.id = tenure_b.chef_id
 			 WHERE chef_b.id != ? AND chef_a.id = ?
