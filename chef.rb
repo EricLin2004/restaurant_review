@@ -1,28 +1,31 @@
 require 'debugger'
+require './model'
 
-class Chef
-	attr_reader :id
+class Chef < Model
 
-	def self.find_by_name(fname, lname)
-		sql = <<-SQL 
-			SELECT *
-			  FROM chefs
-			 WHERE first_name = ?
-			   AND last_name = ?
-		SQL
-
-		Chef.new(RestaurantDB.instance.execute(sql, fname, lname).first)
+	def self.table_name
+		'chefs'
 	end
+	# def self.find_by_name(fname, lname)
+	# 	sql = <<-SQL 
+	# 		SELECT *
+	# 		  FROM chefs
+	# 		 WHERE first_name = ?
+	# 		   AND last_name = ?
+	# 	SQL
 
-	def self.find_by_id(id)
-		sql = <<-SQL
-			SELECT *
-			  FROM chefs
-			 WHERE id = ?
-		SQL
+	# 	Chef.new(RestaurantDB.instance.execute(sql, fname, lname).first)
+	# end
 
-		Chef.new(RestaurantDB.instance.execute(sql, id).first)
-	end
+	# def self.find_by_id(id)
+	# 	sql = <<-SQL
+	# 		SELECT *
+	# 		  FROM chefs
+	# 		 WHERE id = ?
+	# 	SQL
+
+	# 	Chef.new(RestaurantDB.instance.execute(sql, id).first)
+	# end
 
 	def initialize(hash)
 		@id = hash['id']

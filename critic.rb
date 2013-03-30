@@ -1,28 +1,28 @@
 require './review'
+require './model'
 require 'debugger'
-class Critic
 
-	attr_reader :id
+class Critic < Model
 
-	def self.find_by_screen_name(name)
-		sql = <<-SQL
-			SELECT *
-				FROM critics
-			 WHERE screen_name = ?
-		SQL
+	# def self.find_by_screen_name(name)
+	# 	sql = <<-SQL
+	# 		SELECT *
+	# 			FROM critics
+	# 		 WHERE screen_name = ?
+	# 	SQL
 
-		Critic.new(RestaurantDB.instance.execute(sql, name).first)
-	end
+	# 	Critic.new(RestaurantDB.instance.execute(sql, name).first)
+	# end
 
-	def self.find_by_id(id)
-		sql = <<-SQL
-			SELECT *
-				FROM critics
-			 WHERE id = ?
-		SQL
+	# def self.find_by_id(id)
+	# 	sql = <<-SQL
+	# 		SELECT *
+	# 			FROM critics
+	# 		 WHERE id = ?
+	# 	SQL
 
-		Critic.new(RestaurantDB.instance.execute(sql, id).first)
-	end
+	# 	Critic.new(RestaurantDB.instance.execute(sql, id).first)
+	# end
 
 	def initialize(hash)
 		@id = hash['id']

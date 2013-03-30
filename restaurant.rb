@@ -1,25 +1,30 @@
-class Restaurant
-attr_reader :id
+require './model'
 
-	def self.find_by_id(id)
-		sql = <<-SQL 
-			SELECT *
-			FROM restaurants
-			WHERE id = ?
-		SQL
+class Restaurant < Model
 
-		Restaurant.new(RestaurantDB.instance.execute(sql, id).first)
+	def self.table_name
+		'restaurants'
 	end
+	
+	# def self.find_by_id(id)
+	# 	sql = <<-SQL 
+	# 		SELECT *
+	# 		FROM restaurants
+	# 		WHERE id = ?
+	# 	SQL
 
-	def self.find_by_name(name)
-		sql = <<-SQL
-			SELECT *
-			FROM restaurants
-			WHERE name = ?
-		SQL
+	# 	Restaurant.new(RestaurantDB.instance.execute(sql, id).first)
+	# end
 
-		Restaurant.new(RestaurantDB.instance.execute(sql, name).first)
-	end
+	# def self.find_by_name(name)
+	# 	sql = <<-SQL
+	# 		SELECT *
+	# 		FROM restaurants
+	# 		WHERE name = ?
+	# 	SQL
+
+	# 	Restaurant.new(RestaurantDB.instance.execute(sql, name).first)
+	# end
 
 	def self.by_neighbourhood(neigh)
 		sql = <<-SQL
@@ -31,14 +36,14 @@ attr_reader :id
 		Restaurant.new(RestaurantDB.instance.execute(sql, neigh).first)
 	end
 
-	def self.all
-		sql = <<-SQL
-			SELECT *
-			FROM restaurants
-		SQL
+	# def self.all
+	# 	sql = <<-SQL
+	# 		SELECT *
+	# 		FROM restaurants
+	# 	SQL
 
-		RestaurantDB.instance.execute(sql).map {|hash| Restaurant.new(hash)}
-	end
+	# 	RestaurantDB.instance.execute(sql).map {|hash| Restaurant.new(hash)}
+	# end
 
 	def self.top_restaurants(n)
 		sql = <<-SQL

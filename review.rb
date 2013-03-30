@@ -1,13 +1,13 @@
 class Review
-	def self.find_by_id(id)
-		sql = <<-SQL
-			SELECT *
-			  FROM reviews
-			 WHERE id = ?
-		SQL
+	# def self.find_by_id(id)
+	# 	sql = <<-SQL
+	# 		SELECT *
+	# 		  FROM reviews
+	# 		 WHERE id = ?
+	# 	SQL
 
-		Review.new(RestaurantDB.instance.execute(sql, id).first)
-	end
+	# 	Review.new(RestaurantDB.instance.execute(sql, id).first)
+	# end
 
 	def initialize(hash)
 		@id = hash['id']

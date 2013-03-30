@@ -4,6 +4,7 @@ require 'debugger'
 require './chef'
 require './restaurant'
 require './critic'
+require './model'
 
 class RestaurantDB < SQLite3::Database
 	include Singleton
@@ -21,6 +22,6 @@ end
 #puts Chef.find_by_id(2).coworkers
 #puts Chef.find_by_id(1).reviews
 #puts Critic.find_by_id(2).unreviewed_restaurants
-#puts Restaurant.top_restaurants(3)
+#puts Restaurant.top_restaurants
 
-puts Restaurant.highly_reviewed_restaurants(1)
+#Chef.new({:id => nil, :first_name => 'Test', :last_name => 'Test2', :mentor => 0}).save

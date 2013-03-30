@@ -95,4 +95,4 @@ INSERT INTO reviews
      VALUES (null, 'Grand', 20, 1, 2);
 
 INSERT INTO reviews
-     VALUES (null, 'ok', 9, 2, 1);  
+     VALUES (null, 'ok', 9, 2, 1);  	
